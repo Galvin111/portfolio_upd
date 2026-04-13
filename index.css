@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+  /* Heroic Minimalism Palette */
+  --surface: #0a0a0a;
+  --surface-elevated: #111111;
+  --surface-border: #222222;
+  
+  --on-surface: #FAFAFA;
+  --on-surface-meta: #A1A1AA;
+  
+  --primary: #FFFFFF;
+  --on-primary: #000000;
+  
+  /* Cyberpunk / Neon Accents */
+  --accent-cyan: #00f3ff;
+  --accent-purple: #8a2be2;
+  
+  --font-primary: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fluid Logic Canvas */
+#quantum-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+/* Accent Text Utility */
+.text-accent {
+  background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+}
+
+/* Shared Background Wrapper with Moving Gradient */
+.bg-subtle {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+  background: linear-gradient(-45deg, #0a0a0a, #1a0b2e, #0a1128, #0a0a0a);
+  background-size: 400% 400%;
+  animation: bgGradientShift 15s ease infinite;
+}
+
+@keyframes bgGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+a { text-decoration: none; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Typography styles */
+.display-lg {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: var(--on-surface);
+}
+.headline-lg {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.label-md {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  color: var(--on-surface-meta);
+  margin-bottom: 16px;
+}
+.title-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.p-body {
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--on-surface-meta);
+  margin-bottom: 32px;
+  max-width: 65ch;
+  line-height: 1.8;
+}
+
+/* Glass Navigation HUD */
+.glass-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.nav-brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-meta);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: var(--accent-cyan);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: 1px solid transparent;
+  border-radius: 999px; /* Fluid/Solid mix */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--on-surface);
+  border: 1px solid var(--surface-border);
+}
+.btn-secondary:hover {
+  background-color: var(--surface-elevated);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+}
+
+/* Institutional Forms */
+.form-group {
+  margin-bottom: 32px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--on-surface-meta);
+  margin-bottom: 12px;
+}
+.form-control {
+  width: 100%;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  padding: 18px 24px;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  color: var(--on-surface);
+  transition: all 0.3s ease;
+}
+.form-control:focus {
+  outline: none;
+  background-color: transparent;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 2px rgba(0, 243, 255, 0.2);
+}
+
+/* Layout Elements */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 60px;
+}
+@media (min-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+.panel {
+  background-color: rgba(17, 17, 17, 0.6);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 48px;
+  backdrop-filter: blur(20px);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--surface-border);
+  margin: 48px 0;
+}
+
+/* Admin Dashboard Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th, .data-table td {
+  padding: 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-border);
+}
+.data-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--on-surface-meta);
+}
+.data-table td {
+  font-size: 0.875rem;
+  color: var(--on-surface);
+}
+.badge-pill {
+  padding: 4px 12px;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  font-size: 0.7rem;
+}
+
+/* Scroll Reveal and Gallery Animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.img-placeholder {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-meta);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+.img-placeholder:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-purple);
+  box-shadow: 0 10px 30px rgba(138, 43, 226, 0.15);
+}
+.ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+.ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+.profile-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background-color: #111;
+    border-radius: 12px;
+    border: 1px dashed #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+}
+.profile-placeholder:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    color: var(--accent-cyan);
+}
